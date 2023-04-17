@@ -10,14 +10,14 @@ int main(){
     cout << header
          << "\n\nPress <return> to go on" << endl;
 
-    cin.get(); //lee la siguiente linea sin grabarla
+    cin.get(); //lee la siguiente linea sin asignarla a una variable aun
 
     cout << "\nPlease enter a sentence with several words!"
          << "\nEnd with <!> and <return>."
          << endl;
 
-    cin >> word; // Lee la primera palabra
-    getline( cin, rest, '!'); // Lee las siguientes hasta el signo de admiración (metodo, variable, caracter final)
+    cin >> word; // se graba en "word" lo que se grabo en cin
+    getline( cin, rest, '!'); // Lee las siguientes hasta el signo de admiración (fuente, variable, caracter final)
 
     cout << "\nThe first word:  " << word
          << "\nRemaining text:  " << rest << endl;
