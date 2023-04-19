@@ -4,6 +4,8 @@
 
 using namespace std;
 
+// Constants (MACROS)
+
 #define PI      3.1415926536
 #define START   0.0                     // lower limit
 #define END     (2.0 * PI)              // upper limit
