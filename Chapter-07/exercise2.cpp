@@ -25,7 +25,7 @@ int main ()
     while (!end)
     {
         LOCATE(y,x);    cout << 'o';        //bola
-        for (long wait = 0; wait < delay; ++wait)
+        for (long wait = 0; wait < delay; ++wait)   //Esto espera el delay antes de renderizar nuevamente.
             ;
         if (x == 1 || x == 79) dx = -dx; //Cambio de direccion, rebote
         if (y == 23)
