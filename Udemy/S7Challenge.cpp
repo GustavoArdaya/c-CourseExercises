@@ -32,7 +32,7 @@ int main()
     cout << "2D Vector element at index [1][1]: " << vector_2d.at(1).at(1) << endl;
 
     vector1.at(0) = 1000;
-
+    cout << "vector1 index[0] new value: " << vector1.at(0) << endl;
     cout << "After changing vector1 index[0]:" << endl;
     cout << "2D Vector element at index [0][0]: " << vector_2d.at(0).at(0) << endl;
     cout << "2D Vector element at index [0][1]: " << vector_2d.at(0).at(1) << endl;
