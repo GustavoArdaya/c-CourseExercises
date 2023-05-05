@@ -16,7 +16,9 @@ int main ()
 
     double average {0.0};
 
-    average = static_cast<double> (total) / count;
+    average = static_cast<double> (total) / count;  // this is the "new" way of casting.
+
+    // average = (double) total / count;  // this is the "old" way. It doesnt check first whether it can convert the type.
 
     cout << "The 3 numbers were: " << num1 << ", " << num2 << ", " << num3 << endl;
     cout << "The sum of the numbers is: " << total << endl;
