@@ -18,8 +18,12 @@ int main () {
         cin >> choice;
         if (choice == 'p' || choice == 'P') {
             cout << endl;
-            for (auto num : number_list) {
-                cout << num << " ";
+            if (number_list.size() > 0) {
+                for (auto num : number_list) {
+                    cout << num << " ";
+                }
+            } else {
+                cout << "\nList is empty!" << endl;
             }
             cout << endl;
         }
@@ -36,25 +40,37 @@ int main () {
 
         }
         else if (choice == 'm' || choice == 'M') {
-            int sum {};
-            for (auto num : number_list) {
-                sum += num;
+            if (number_list.size() > 0) {
+                int sum {};
+                for (auto num : number_list) {
+                    sum += num;
+                }
+                cout << "\nThe mean of the numbers is " << sum / number_list.size() << endl;
+            } else {
+                cout << "\nUnable to get mean. List is empty!" << endl;
             }
-            cout << "\nThe mean of the numbers is " << sum / number_list.size() << endl;
-        }
+        } 
         else if (choice == 's' || choice == 'S') {
-            int min = number_list.at(0);
-            for (auto num : number_list) {
-                if (num < min) min = num;
+            if (number_list.size() > 0) {
+                int min = number_list.at(0);
+                for (auto num : number_list) {
+                    if (num < min) min = num;
+                }
+                cout << "\nThe smallest number is " << min << endl;
+            } else {
+                cout << "\nUnable to get smallest number. List is empty!" <<endl;
             }
-            cout << "\nThe smallest number is " << min << endl;
         }
         else if (choice == 'l' || choice == 'L') {
-            int max = number_list.at(0);
-            for (auto num : number_list) {
-                if (num > max) max = num;
+            if (number_list.size() > 0) { 
+                int max = number_list.at(0);
+                for (auto num : number_list) {
+                    if (num > max) max = num;
+                }
+                cout << "\nThe largest number is " << max << endl;
+            } else {
+                cout << "\nUnable to get largest number. List is empty!" <<endl;
             }
-            cout << "\nThe largest number is " << max << endl;
         }
         else if (choice == 'q' || choice == 'Q') {
             cout << "\nBye!" << endl;
