@@ -19,7 +19,8 @@ int main() {
     cout << "Array2: ";
     print(array2, array2_size);
 
-    int *results = apply_all(array1, array1_size, array2, array2_size);
+    int *results = apply_all(array1, array1_size, array2, array2_size); //this derreferences array in heap?
+    
     constexpr size_t results_size (array1_size * array2_size);
     cout << "result: ";
     print(results, results_size);
@@ -41,9 +42,10 @@ void print(const int *const array, size_t array_size) {
     cout << endl;
 }
 
+// function returns a reference and receives two array references.
 int *apply_all(const int *const array1, size_t array1_size, const int *const array2, size_t array2_size) {
     
-    int *new_array {};
+    int *new_array {}; //creates new reference in heap?
     new_array = new int[array1_size * array2_size];
     int index {};
 
