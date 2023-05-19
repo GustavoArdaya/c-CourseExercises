@@ -93,68 +93,73 @@ std::istream &operator>>(std::istream &in, MyString &rhs) {
     return in;                                  // returns in as input object
 }
 
-// overloaded minus operator
-MyString operator-(const MyString &obj) {
-    char *new_string = new char[std::strlen(obj.str) + 1]; // allocate space in heap for string + terminator
-    std::strcpy(new_string, obj.str);
-    for (size_t i = 0; i < std::strlen(new_string); i++)
-        new_string[i] = std::tolower(new_string[i]);
-    MyString new_obj{new_string};
-    delete [] new_string;
-    return new_obj;
+// overloaded to lower case operator
+MyString MyString::operator-() const{
+    char *buff = new char[std::strlen(str) + 1];    // allocate space for new string
+    std::strcpy(buff, str);                         // copy original string into new one
+    for (size_t i = 0; i < std::strlen(buff); i++)
+        buff[i] = std::tolower(buff[i]);            // convert characters to lower case
+    MyString temp {buff};                           // use constructor to create temporary MyString object from new string
+    delete [] buff;                                 // deallocate memory from new string
+    return temp;                                    // return new object (thus, no & is needed in return type)
 }
 
-MyString operator+(const MyString &lhs, const MyString &rhs){
-    char *new_string = new char[std::strlen(lhs.str) + std::strlen(rhs.str) + 1];
-    std::strcpy(new_string, lhs.str);
-    std::strcat(new_string, rhs.str);
-    MyString new_obj {new_string};
-    delete [] new_string;
-    return new_obj;
+// overloaded concatenate operator // returns new object...
+MyString MyString::operator+(const MyString &rhs){
+    char *buff = new char[std::strlen(str) + std::strlen(rhs.str) + 1];
+    std::strcpy(buff, str);                         // copies str to buff
+    std::strcat(buff, rhs.str);                     // adds parameter object's str to end of buff
+    MyString temp {buff};                                // creates new MyString object from buff
+    delete [] buff;                                 // deallocates memory from buff
+    return temp;                                    // returns copy
 }
 
-bool operator==(const MyString &lhs, const MyString &rhs) {
-    return (std::strcmp(lhs.str, rhs.str) == 0);
+bool MyString::operator==(const MyString &rhs) const {
+    return (std::strcmp(str, rhs.str) == 0);
 }
 
-bool operator!=(const MyString &lhs, const MyString &rhs) {
-    return !(std::strcmp(lhs.str, rhs.str) == 0);
+bool MyString::operator!=(const MyString &rhs) const {
+    return !(std::strcmp(str, rhs.str) == 0);
 }
 
-bool operator<(const MyString &lhs, const MyString &rhs){
-    return (std::strcmp(lhs.str, rhs.str) < 0);
+bool MyString::operator<(const MyString &rhs) const {
+    return (std::strcmp(str, rhs.str) < 0);
 }
 
-
-bool operator>(const MyString &lhs, const MyString &rhs){
-    return (std::strcmp(lhs.str, rhs.str) > 0);
+bool MyString::operator>(const MyString &rhs) const {
+    return (std::strcmp(str, rhs.str) > 0);
 }
 
-MyString &operator+=(MyString &lhs, const MyString &rhs){
-    lhs = lhs + rhs;
-    return lhs;                         // this makes use of previously overloaded "+" operator and "="
+MyString &MyString::operator+=(const MyString &rhs) {
+    *this = *this + rhs;           // makes use of overloaded "=". assigns original object + other object 
+    return *this;                  // since it returns original object it uses & in return type and returns a reference
 }
 
-MyString operator*(const MyString &lhs, int n) {
-    MyString new_obj;
-    for (int i = 1; i <= n; i++)
-        new_obj = new_obj + lhs;        // this also seems to make use of previously overloaded "+"
-    return new_obj;
+MyString MyString::operator*(int n) const {
+    size_t buff_size = (std::strlen(str) * n) + 1; // this stores value for size of allocated space per number of repetitions
+    char *buff = new char[buff_size];
+    strcpy(buff, ""); // this initializes buffer with empty string
+    for (int i = 1; i < n; i++)
+        strcat(buff, str);          // this adds str content n types to buff
+    MyString temp {buff};           // new MyString object created from buff
+    delete [] buff;                 // deallocates space from heap
+    return temp;                    // returns new object (thus, no & needed)
 }
 
-MyString &operator*=(MyString &lhs, int n) {
-    lhs = lhs * n;                      // makes use of previously overloaded "*" and "="
-    return lhs; 
+MyString &MyString::operator*=(int n) { // returns reference!
+    *this = *this * n;               // makes use of previous overloaded method
+    return *this;
 }
 
-MyString &operator++(MyString &obj) {       // pre-increment
-    for (size_t i = 0; i < std::strlen(obj.str); i++)
-        obj.str[i] = std::toupper(obj.str[i]);
-    return obj;                 // since it returns same object reference there's a & before operator
+// to upper case
+MyString &MyString::operator++() {      // pre-increment
+    for (size_t i=0; i< std::strlen(str); i++)
+        str[i] = std::toupper(str[i]);
+    return *this;                       // modifies original
 }
 
-MyString operator++(MyString &obj, int) {   // int defines post-increment
-    MyString new_obj {obj};
-    ++obj;                                  // this calls pre-increment
-    return new_obj;             // since it returns a new object there's no & before operator
+MyString MyString::operator++(int) {
+    MyString temp (*this);          // copy operator
+    operator++();                   // calls previous object to increment original by reference
+    return temp;                    // returns original, before increment, and thus a new object
 }
