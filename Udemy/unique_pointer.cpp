@@ -3,6 +3,8 @@
 #include <vector>
 
 class Test {
+// friend std::ostream &operator<<(std::ostream &os, const Test &test);
+
 private:
     int data;
 public: 
@@ -11,7 +13,14 @@ public:
 int get_data() const { return data;}
 ~Test() { std::cout << "Test destructor (" << data << ")" << std::endl; }
 
+
+
 };
+
+// std::ostream &operator<<(std::ostream &os, const Test &test) {
+//     os << "[Test: " << test.data;
+//     return os;
+// }
 
 int main () {
 
@@ -27,6 +36,15 @@ int main () {
     t3 = std::move(t1);     // this moves t1 pointer into t3, so t1 becomes a null pointer
     if (!t1)                // t3 is now "owner" of previus t1 address
         std::cout << "t1 is nullptr" << std::endl;
+
+    // std::vector<std::unique_ptr<Test>> tests;
+
+    // tests.push_back(t2);
+    // tests.push_back(t3);
+
+    // for (const auto &test : tests) {
+    //     std::cout << *test << std::endl;
+    // }
 
     return 0;
 }
