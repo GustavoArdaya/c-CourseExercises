@@ -36,7 +36,7 @@ int main() {
 
     std::cout << num2 << std::endl;
 
-    std::cout.unsetf(std::ios::scientific); // this too will reset
+    std::cout.unsetf(std::ios::scientific | std::ios::fixed); // this too will reset
 
     return 0;
 }
