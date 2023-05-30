@@ -20,11 +20,13 @@ int main() {
     }
 
     in_file >> key;
+    
     std::cout << std::endl;
     std::cout   << std::setw(15) << std::left << "Student"
                 << std::setw(5)  << std::right << "Grade" << std::endl;
     std::cout   << std::setw(20) << std::setfill('-') << "" << std::endl;
     std::cout   << std::setfill(' ');
+
     while (!in_file.eof()) {
         grade = 0;
         in_file >> name >> response; 
@@ -38,7 +40,9 @@ int main() {
         << std::setw(5)  << std::right << grade << std::endl;
         sumGrade += grade;
     }
-    double avg = static_cast<double> (sumGrade) / sumStudents;    
+
+    double avg = static_cast<double> (sumGrade) / sumStudents;
+
     std::cout   << std::setw(20) << std::setfill('-') << "" << std::endl;
     std::cout   << std::setfill(' ');
     std::cout   << std::setw(15) << std::left << "Average score"
